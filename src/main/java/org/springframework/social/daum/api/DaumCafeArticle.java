@@ -2,44 +2,27 @@ package org.springframework.social.daum.api;
 
 public class DaumCafeArticle {
 
-	/**
-	 * 게시글 제목
-	 */
+
 	private String name;
 
-	/**
-	 * 비밀글 여부 (한줄 메모장에 한함)
-	 */
+
 	private String hidden;
 
-	/**
-	 * 작성자 nickname
-	 */
+
 	private DaumCafeArticleUsername userName;
 
-	/**
-	 * 게시판Id
-	 */
+
 	private String boardId;
 
-	/**
-	 * 댓글 개수
-	 */
+
 	private Integer commentCount;
 
-	/**
-	 * 작성일(milliseconds since January 1, 1970, 00:00:00 GMT)
-	 */
+
 	private Long regDateTime;
 
-	/**
-	 * 조회수
-	 */
+
 	private Integer viewCount;
 
-	/**
-	 * 게시글 번호
-	 */
 	private Integer articleId;
 
 	public String getName() {

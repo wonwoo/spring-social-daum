@@ -29,7 +29,7 @@ public class CafeTest extends DaumTest {
 
 	@Test
 	public void getDaumCafeRecentArticles() {
-		DaumCafeRecentArticles daumCafeRecentArticles = daum.cafeOperation().recentArticles("vmffotl");
+		DaumCafeRecentArticles daumCafeRecentArticles = daum.cafeOperation().recentArticles("10201010");
 		System.out.println(String.format("getTotalSize : %s", daumCafeRecentArticles.getTotalSize()));
 		System.out.println(daumCafeRecentArticles.getArticle().stream().map(t -> t.toString()).collect(joining("\n")));
 	}
@@ -45,7 +45,7 @@ public class CafeTest extends DaumTest {
 
 	@Test
 	public void getDaumWriteArticle() {
-		DaumCafeArticle daumCafeAlimis = daum.cafeOperation().writeArticle("10201010", "TEST ±Û¾²±â", true);
+		DaumCafeArticle daumCafeAlimis = daum.cafeOperation().writeArticle("10201010", "TEST í…ŒìŠ¤íŠ¸", true);
 		System.out.println(daumCafeAlimis);
 	}
 }

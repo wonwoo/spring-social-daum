@@ -2,32 +2,17 @@ package org.springframework.social.daum.api;
 
 public class DaumCafeBoard {
 
-	/**
-	 * 게시판 아이디
-	 */
+
 	private String boardId;
 
-	/**
-	 * 게시판 이름
-	 */
 	private String name;
 
-	/**
-	 * 새글 존재 여부
-	 */
 	private boolean hasNew;
 
-	/**
-	 * 게시판 타입
-	 */
 	private String boardType;
-	/**
-	 * 게시판 감추기 여부(관리자 기능)
-	 */
+
 	private boolean display;
-	/**
-	 * 익명 게시판 여부
-	 */
+
 	private boolean anonymous;
 
 	public String getName() {

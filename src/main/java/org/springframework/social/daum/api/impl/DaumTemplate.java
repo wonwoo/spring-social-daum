@@ -6,6 +6,9 @@ import org.springframework.social.daum.api.UserOperations;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.support.ClientHttpRequestFactorySelector;
 import org.springframework.social.support.URIBuilder;
+import org.springframework.web.client.RestTemplate;
+
+import java.net.URI;
 
 public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 
@@ -53,7 +56,23 @@ public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 	}
 
 	@Override
+	protected void configureRestTemplate(RestTemplate restTemplate) {
+		restTemplate.setErrorHandler(new DaumErrorHandler());
+	}
+
 	public <T> T fetchObject(String url, Class<T> type) {
 		return getRestTemplate().getForObject(URIBuilder.fromUri(getBaseGraphApiUrl() + url).build(), type);
+	}
+
+	public <T> T fetchObject(URI uri, Class<T> type, Object... urlVariables) {
+		return fetchObject(uri.toString(), type, urlVariables);
+	}
+
+	public <T> T fetchObject(String url, Class<T> type, Object... urlVariables) {
+		return getRestTemplate().getForObject(getBaseGraphApiUrl() + url, type, urlVariables);
+	}
+
+	public <T> T fetchPostObject(String url, Object request, Class<T> type, Object... urlVariables) {
+		return getRestTemplate().postForObject(getBaseGraphApiUrl() + url, request, type, urlVariables);
 	}
 }

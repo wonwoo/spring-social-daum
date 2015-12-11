@@ -24,48 +24,45 @@ public class CafeTemplate extends AbstractDaumOperations implements CafeOperatio
 		this.daumRestApi = daumRestApi;
 	}
 
-	@Override
+
 	public DaumFavoriteCafe favorite() {
 		requireAuthorization();
 		return daumRestApi.fetchObject("/cafe/v1/favorite_cafes.json", DaumFavoriteCafe.class);
 	}
-	// TODO daumRestApi º¯°æ
+	// TODO daumRestApi
 
-	@Override
+
 	public DaumCafeBoards boards(String cafeCode) {
 		requireAuthorization();
-		return restTemplate.getForObject(URIBuilder.fromUri("/cafe/v1/boards/{cafeCode}.json").build().toString(),
-				DaumCafeBoards.class, cafeCode);
+		return daumRestApi.fetchObject("/cafe/v1/boards/{cafeCode}.json", DaumCafeBoards.class, cafeCode);
 	}
 
-	@Override
+
 	public DaumCafeArticles articles(String cafeCode, String boardId) {
 		requireAuthorization();
-		return restTemplate.getForObject("/cafe/v1/articles/{cafeCode}/{boardId}.json", DaumCafeArticles.class,
-				cafeCode, boardId);
+		return daumRestApi.fetchObject("/cafe/v1/articles/{cafeCode}/{boardId}.json", DaumCafeArticles.class, cafeCode,cafeCode, boardId);
 	}
 
-	@Override
+
 	public DaumCafeRecentArticles recentArticles(String cafeCode) {
 		requireAuthorization();
-		return restTemplate.getForObject("/cafe/v1/recent_articles/{cafeCode}.json", DaumCafeRecentArticles.class,
+		return daumRestApi.fetchObject("/cafe/v1/recent_articles/{cafeCode}.json", DaumCafeRecentArticles.class,
 				cafeCode);
 	}
 
-	@Override
+
 	public DaumCafeAlimis alimis() {
 		requireAuthorization();
-		return restTemplate.getForObject("/cafe/v1/alimis.json", DaumCafeAlimis.class);
+		return daumRestApi.fetchObject("/cafe/v1/alimis.json", DaumCafeAlimis.class);
 	}
 
-	@Override
 	public DaumCafeArticle writeArticle(String cafeCode, String content, boolean hideyn) {
 		requireAuthorization();
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
 		String hide = hideyn ? "y" : "n";
 		parameters.set("hideyn", hide);
 		parameters.set("content", content);
-		return restTemplate.postForObject("/cafe/v1/write_article/{cafeCode}/_memo.json", parameters,
+		return daumRestApi.fetchPostObject("/cafe/v1/write_article/{cafeCode}/_memo.json", parameters,
 				DaumCafeArticle.class, cafeCode);
 	}
 }
