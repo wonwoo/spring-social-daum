@@ -5,7 +5,7 @@ import org.springframework.social.daum.connect.DaumConnectionFactory;
 import org.springframework.social.security.provider.OAuth2AuthenticationService;
 
 public class DaumAuthenticationService extends OAuth2AuthenticationService<Daum> {
-	public DaumAuthenticationService(String clientId) {
-		super(new DaumConnectionFactory(clientId));
+	public DaumAuthenticationService(String clientId, String appSecret) {
+		super(new DaumConnectionFactory(clientId,appSecret));
 	}
 }

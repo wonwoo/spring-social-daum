@@ -4,8 +4,9 @@ import org.springframework.social.config.xml.AbstractProviderConfigBeanDefinitio
 import org.springframework.social.config.xml.AbstractProviderConfigNamespaceHandler;
 
 public class DaumNamespaceHandler extends AbstractProviderConfigNamespaceHandler {
+
 	@Override
 	protected AbstractProviderConfigBeanDefinitionParser getProviderConfigBeanDefinitionParser() {
-		return null;
+		return new DaumConfigBeanDefinitionParser();
 	}
 }

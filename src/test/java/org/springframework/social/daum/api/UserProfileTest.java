@@ -13,5 +13,4 @@ public class UserProfileTest extends DaumTest {
 		DaumProfile profile = daum.userOperation().getUserProfile();
 		System.out.println(profile.getResult().getExtraData());
 	}
-
 }

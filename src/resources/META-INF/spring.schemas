@@ -1,0 +1,2 @@
+http\://www.springframework.org/schema/social/spring-social-daum.xsd=org/springframework/social/daum/config/xml/spring-social-daum-1.1.xsd
+http\://www.springframework.org/schema/social/spring-social-daum-1.1.xsd=org/springframework/social/daum/config/xml/spring-social-daum-1.1.xsd
