@@ -6,4 +6,6 @@ public interface Daum extends ApiBinding, DaumRestApi {
 	UserOperations userOperation();
 	
 	CafeOperations cafeOperation();
+
+	BlogOperations blogOperations();
 }

@@ -44,7 +44,7 @@ public class DaumConnectTest {
 
     @Test
     public void accessTokenTest() throws IOException {
-        String code = "104163";
+        String code = "94876";
         OAuth2Operations oAuth2Operations = daumConnectionFactory.getOAuthOperations();
         AccessGrant accessGrant = oAuth2Operations.exchangeForAccess(code, "http://127.0.0.1:8080/daum/callback", null);
         printAcess(accessGrant);

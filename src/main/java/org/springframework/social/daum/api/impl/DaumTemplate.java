@@ -1,5 +1,6 @@
 package org.springframework.social.daum.api.impl;
 
+import org.springframework.social.daum.api.BlogOperations;
 import org.springframework.social.daum.api.CafeOperations;
 import org.springframework.social.daum.api.Daum;
 import org.springframework.social.daum.api.UserOperations;
@@ -9,11 +10,13 @@ import org.springframework.social.support.URIBuilder;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.util.Map;
 
 public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 
 	private UserOperations userOperation;
 	private CafeOperations cafeOperation;
+	private BlogOperations blogOperations;
 
 	private String adminKey;
 
@@ -41,6 +44,11 @@ public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 		return cafeOperation;
 	}
 
+	@Override
+	public BlogOperations blogOperations() {
+		return blogOperations;
+	}
+
 	private void initialize() {
 		super.setRequestFactory(ClientHttpRequestFactorySelector.bufferRequests(getRestTemplate().getRequestFactory()));
 		initSubApis();
@@ -53,6 +61,7 @@ public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 	private void initSubApis() {
 		userOperation = new UserTemplate(this, getRestTemplate(), isAuthorized());
 		cafeOperation = new CafeTemplate(this, getRestTemplate(), isAuthorized());
+		blogOperations = new BlogTemplate(this, getRestTemplate(), isAuthorized());
 	}
 
 	@Override
@@ -69,6 +78,11 @@ public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 	}
 
 	public <T> T fetchObject(String url, Class<T> type, Object... urlVariables) {
+		return getRestTemplate().getForObject(getBaseGraphApiUrl() + url, type, urlVariables);
+	}
+
+	@Override
+	public <T> T fetchObject(String url, Class<T> type, Map<String, ?> urlVariables) {
 		return getRestTemplate().getForObject(getBaseGraphApiUrl() + url, type, urlVariables);
 	}
 
