@@ -24,7 +24,7 @@ public class BlogTemplate extends AbstractDaumOperations implements BlogOperatio
     @Override
     public DaumBlogList list(String blogName, String categoryId, Integer pageNo, Integer result, String viewContent) {
         requireAuthorization();
-        Map<String, Object> params = new HashMap<>();
+        Map<String, Object> params = new HashMap<String,Object>();
         params.put("blogName", blogName);
         params.put("categoryId", categoryId);
         params.put("pageNo", pageNo);

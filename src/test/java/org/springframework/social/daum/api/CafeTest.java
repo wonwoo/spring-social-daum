@@ -45,7 +45,7 @@ public class CafeTest extends DaumTest {
 
 	@Test
 	public void getDaumWriteArticle() {
-		DaumCafeArticle daumCafeAlimis = daum.cafeOperation().writeArticle("10201010", "TEST 테스트", true);
+		DaumCafeArticle daumCafeAlimis = daum.cafeOperation().writeArticle("10201010", "TEST 123", true);
 		System.out.println(daumCafeAlimis);
 	}
 }

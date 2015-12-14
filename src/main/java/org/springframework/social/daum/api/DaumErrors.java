@@ -5,19 +5,12 @@ package org.springframework.social.daum.api;
  */
 public class DaumErrors {
 
-    /**
-     * jsonp를 지원하지 않는 API를 jsonp로 호출한 경우
-     */
     public static final Integer ACCESS_DENIED_ERROR = 401;
 
-    /**
-     * appkey를 사용가능한 whitelist가 아닌곳에서 호출한 경우
-     */
+
     public static final Integer UNAUTHORIZED = 402;
 
-    /**
-     * 등록되지 않은 appkey사용
-     */
+
     public static final Integer NOT_AUTHORIZED_ERROR = 403;
 
     public static final Integer RESOURCE_NOT_FOUND = 404;

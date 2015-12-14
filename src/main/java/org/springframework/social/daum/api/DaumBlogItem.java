@@ -1,7 +1,5 @@
 package org.springframework.social.daum.api;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
-
 /**
  * Created by wonwoo on 15. 12. 13..
  */

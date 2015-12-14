@@ -20,7 +20,7 @@ public interface BlogOperations {
     DaumBlogInfos info(String blogName);
 
 
-    //TODO 새글 쓰기, 글 수정하기 , 글 내용 가져오기(글한개), 파일 업로드, 댓글 작성 하기, 나에 대한 반응 목록 가져오기
+
 
 
 }
