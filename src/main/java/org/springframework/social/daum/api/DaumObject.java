@@ -6,7 +6,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 
-public abstract class DaumObject {
+public class DaumObject {
 	private Map<String, Object> extraData;
 
 	public DaumObject() {

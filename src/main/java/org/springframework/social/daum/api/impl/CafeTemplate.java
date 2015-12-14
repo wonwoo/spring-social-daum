@@ -24,32 +24,28 @@ public class CafeTemplate extends AbstractDaumOperations implements CafeOperatio
 		this.daumRestApi = daumRestApi;
 	}
 
-
 	public DaumFavoriteCafe favorite() {
 		requireAuthorization();
 		return daumRestApi.fetchObject("/cafe/v1/favorite_cafes.json", DaumFavoriteCafe.class);
 	}
 	// TODO daumRestApi
 
-
 	public DaumCafeBoards boards(String cafeCode) {
 		requireAuthorization();
 		return daumRestApi.fetchObject("/cafe/v1/boards/{cafeCode}.json", DaumCafeBoards.class, cafeCode);
 	}
 
-
 	public DaumCafeArticles articles(String cafeCode, String boardId) {
 		requireAuthorization();
-		return daumRestApi.fetchObject("/cafe/v1/articles/{cafeCode}/{boardId}.json", DaumCafeArticles.class, cafeCode,cafeCode, boardId);
+		return daumRestApi.fetchObject("/cafe/v1/articles/{cafeCode}/{boardId}.json", DaumCafeArticles.class, cafeCode,
+				cafeCode, boardId);
 	}
-
 
 	public DaumCafeRecentArticles recentArticles(String cafeCode) {
 		requireAuthorization();
 		return daumRestApi.fetchObject("/cafe/v1/recent_articles/{cafeCode}.json", DaumCafeRecentArticles.class,
 				cafeCode);
 	}
-
 
 	public DaumCafeAlimis alimis() {
 		requireAuthorization();
@@ -62,7 +58,7 @@ public class CafeTemplate extends AbstractDaumOperations implements CafeOperatio
 		String hide = hideyn ? "y" : "n";
 		parameters.set("hideyn", hide);
 		parameters.set("content", content);
-		return daumRestApi.fetchPostObject("/cafe/v1/write_article/{cafeCode}/_memo.json", parameters,
-				DaumCafeArticle.class, cafeCode);
+		return daumRestApi.post("/cafe/v1/write_article/{cafeCode}/_memo.json", parameters, DaumCafeArticle.class,
+				cafeCode);
 	}
 }

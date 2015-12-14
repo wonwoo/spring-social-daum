@@ -24,7 +24,10 @@ public class DaumConfigBeanDefinitionParser extends AbstractProviderConfigBeanDe
 	protected BeanDefinition getConnectionFactoryBeanDefinition(String appId, String appSecret,
 			Map<String, Object> allAttributes) {
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(DaumConnectionFactory.class)
-				.addConstructorArgValue(appId);
+				.addConstructorArgValue(appId).addConstructorArgValue(appSecret);
+		if (allAttributes.containsKey("app-namespace")) {
+			builder.addConstructorArgValue(allAttributes.get("app-namespace"));
+		}
 		return builder.getBeanDefinition();
 	}
 }

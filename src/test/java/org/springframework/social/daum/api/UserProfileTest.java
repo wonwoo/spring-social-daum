@@ -3,7 +3,7 @@ package org.springframework.social.daum.api;
 import org.junit.Test;
 
 public class UserProfileTest extends DaumTest {
-
+	
 	@Test
 	public void getDaumProfile() {
 		long id = daum.userOperation().getProfileId();

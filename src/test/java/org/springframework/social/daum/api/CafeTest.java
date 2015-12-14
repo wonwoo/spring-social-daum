@@ -5,7 +5,6 @@ import static java.util.stream.Collectors.*;
 import org.junit.Test;
 
 public class CafeTest extends DaumTest {
-
 	@Test
 	public void getDaumCafeFavorite() {
 		DaumFavoriteCafe daumFavoriteCafe = daum.cafeOperation().favorite();

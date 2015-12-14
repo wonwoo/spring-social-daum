@@ -11,6 +11,6 @@ public class DaumConnectionFactory extends OAuth2ConnectionFactory<Daum> {
 	}
 
 	public DaumConnectionFactory(String appId, String appSecret, String appNamespace) {
-		super("facebook", new DaumServiceProvider(appId, appSecret, appNamespace), new DaumAdapter());
+		super("daum", new DaumServiceProvider(appId, appSecret, appNamespace), new DaumAdapter());
 	}
 }
