@@ -28,4 +28,24 @@ public class SearchTemplate implements SearchOperations {
 		return responseEntity.getBody();
 	}
 
+	@Override
+	public DaumSearch<DaumBlogSearch> board(String q, Integer result, String advance, Integer pageno) {
+		return this.board(q, result, advance, pageno, "accu");
+	}
+
+	@Override
+	public DaumSearch<DaumBlogSearch> board(String q, Integer result, String advance) {
+		return this.board(q, result, advance, 1);
+	}
+
+	@Override
+	public DaumSearch<DaumBlogSearch> board(String q, Integer result) {
+		return this.board(q, result, "n");
+	}
+
+	@Override
+	public DaumSearch<DaumBlogSearch> board(String q) {
+		return this.board(q, 20);
+	}
+
 }
