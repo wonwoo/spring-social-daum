@@ -3,22 +3,13 @@ package org.springframework.social.daum.api;
 /**
  * Created by wonwoo on 15. 12. 15..
  */
-public class DaumBlogSearch {
+public class DaumWebSearch {
 
     private String pubDate;
-    private String author;
     private String title;
     private String description;
     private String link;
-    private String comment;
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public String getComment() {
-        return comment;
-    }
+    private String url;
 
     public String getDescription() {
         return description;
@@ -36,15 +27,18 @@ public class DaumBlogSearch {
         return title;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("DaumBlogSearch{");
-        sb.append("author='").append(author).append('\'');
+        final StringBuffer sb = new StringBuffer("DaumWebSearch{");
+        sb.append("description='").append(description).append('\'');
         sb.append(", pubDate='").append(pubDate).append('\'');
         sb.append(", title='").append(title).append('\'');
-        sb.append(", description='").append(description).append('\'');
         sb.append(", link='").append(link).append('\'');
-        sb.append(", comment='").append(comment).append('\'');
+        sb.append(", url='").append(url).append('\'');
         sb.append('}');
         return sb.toString();
     }
