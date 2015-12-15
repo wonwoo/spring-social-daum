@@ -8,6 +8,7 @@ import org.springframework.web.client.RestTemplate;
 public class UserTemplate extends AbstractDaumOperations implements UserOperations {
 
 	private RestTemplate restTemplate;
+	private String prefix = "/user/v1/";
 
 	// public UserTemplate(RestTemplate restTemplate, RestTemplate
 	// adminRestTemplate, boolean isAuthorized) {
@@ -36,6 +37,6 @@ public class UserTemplate extends AbstractDaumOperations implements UserOperatio
 
 	public DaumProfile getUserProfile() {
 		requireAuthorization();
-		return daumRestApi.fetchObject("/user/v1/show.json", DaumProfile.class);
+		return daumRestApi.fetchObject(prefix + "show.json", DaumProfile.class);
 	}
 }

@@ -15,76 +15,81 @@ import org.springframework.social.daum.api.DaumVclipSearch;
 import org.springframework.social.daum.api.DaumWebSearch;
 import org.springframework.social.daum.api.SearchOperations;
 
-public class SearchTemplate implements SearchOperations {
+public class SearchTemplate extends AbstractApiRestTemplate implements SearchOperations {
 
-	private SearchRestTemplate searchRestTemplate = null;
+	private ApiRestTemplate apiRestTemplate = null;
 	private DaumRestApi daumRestApi = null;
 
-	public SearchTemplate(DaumRestApi daumRestApi, SearchRestTemplate searchRestTemplate) {
-		this.searchRestTemplate = searchRestTemplate;
+	@Override
+	public void setUrl(StringBuilder builder) {
+		builder.append("search/");
+	}
+
+	public SearchTemplate(DaumRestApi daumRestApi, ApiRestTemplate apiRestTemplate) {
+		this.apiRestTemplate = apiRestTemplate;
 		this.daumRestApi = daumRestApi;
 	}
 
 	@Override
 	public DaumSearch<DaumBoardSearch> board(DaumSearchRequest daumSearchRequest) {
-		String url = "https://apis.daum.net/search/board";
-		return searchRestTemplate
+		String url = getUrl() + "board";
+		return apiRestTemplate
 				.exchange(url, HttpMethod.GET, new ParameterizedTypeReference<DaumSearch<DaumBoardSearch>>() {
 				}, daumSearchRequest).getBody();
 	}
 
 	@Override
 	public DaumSearch<DaumVclipSearch> vclip(DaumSearchRequest daumSearchRequest) {
-		String url = "https://apis.daum.net/search/vclip";
-		return searchRestTemplate
+		String url = getUrl() + "vclip";
+		return apiRestTemplate
 				.exchange(url, HttpMethod.GET, new ParameterizedTypeReference<DaumSearch<DaumVclipSearch>>() {
 				}, daumSearchRequest).getBody();
 	}
 
 	@Override
 	public DaumSearch<DaumBlogSearch> blog(DaumSearchRequest daumSearchRequest) {
-		String url = "https://apis.daum.net/search/blog";
-		return searchRestTemplate
+		String url = getUrl() + "blog";
+		return apiRestTemplate
 				.exchange(url, HttpMethod.GET, new ParameterizedTypeReference<DaumSearch<DaumBlogSearch>>() {
 				}, daumSearchRequest).getBody();
 	}
 
 	@Override
 	public DaumSearch<DaumWebSearch> web(DaumSearchRequest daumSearchRequest) {
-		String url = "https://apis.daum.net/search/web";
-		return searchRestTemplate
+		String url = getUrl() + "web";
+		return apiRestTemplate
 				.exchange(url, HttpMethod.GET, new ParameterizedTypeReference<DaumSearch<DaumWebSearch>>() {
 				}, daumSearchRequest).getBody();
 	}
 
 	@Override
 	public DaumSearch<DaumImageSearch> image(DaumSearchRequest daumSearchRequest) {
-		String url = "https://apis.daum.net/search/image";
-		return searchRestTemplate
+		String url = getUrl() + "image";
+		return apiRestTemplate
 				.exchange(url, HttpMethod.GET, new ParameterizedTypeReference<DaumSearch<DaumImageSearch>>() {
 				}, daumSearchRequest).getBody();
 	}
 
 	@Override
 	public DaumSearch<DaumKnowledgeSearch> knowledge(DaumSearchRequest daumSearchRequest) {
-		String url = "https://apis.daum.net/search/knowledge";
-		return searchRestTemplate
+		String url = getUrl() + "knowledge";
+		return apiRestTemplate
 				.exchange(url, HttpMethod.GET, new ParameterizedTypeReference<DaumSearch<DaumKnowledgeSearch>>() {
 				}, daumSearchRequest).getBody();
 	}
 
 	@Override
 	public DaumSearch<DaumBookSearch> book(DaumSearchRequest daumSearchRequest) {
-		String url = "https://apis.daum.net/search/book";
-		return searchRestTemplate
+		String url = getUrl() + "book";
+		return apiRestTemplate
 				.exchange(url, HttpMethod.GET, new ParameterizedTypeReference<DaumSearch<DaumBookSearch>>() {
 				}, daumSearchRequest).getBody();
 	}
 
 	@Override
 	public DaumSearch<DaumCafeSearch> cafe(DaumSearchRequest daumSearchRequest) {
-		String url = "https://apis.daum.net/search/cafe";
-		return searchRestTemplate
+		String url = getUrl() + "cafe";
+		return apiRestTemplate
 				.exchange(url, HttpMethod.GET, new ParameterizedTypeReference<DaumSearch<DaumCafeSearch>>() {
 				}, daumSearchRequest).getBody();
 	}

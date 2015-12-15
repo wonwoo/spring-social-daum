@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 public class CafeTemplate extends AbstractDaumOperations implements CafeOperations {
 
+	private String prefix = "/cafe/v1/";
 	private final RestTemplate restTemplate;
 	private DaumRestApi daumRestApi;
 
@@ -26,30 +27,30 @@ public class CafeTemplate extends AbstractDaumOperations implements CafeOperatio
 
 	public DaumFavoriteCafe favorite() {
 		requireAuthorization();
-		return daumRestApi.fetchObject("/cafe/v1/favorite_cafes.json", DaumFavoriteCafe.class);
+		return daumRestApi.fetchObject(prefix + "favorite_cafes.json", DaumFavoriteCafe.class);
 	}
 	// TODO daumRestApi
 
 	public DaumCafeBoards boards(String cafeCode) {
 		requireAuthorization();
-		return daumRestApi.fetchObject("/cafe/v1/boards/{cafeCode}.json", DaumCafeBoards.class, cafeCode);
+		return daumRestApi.fetchObject(prefix + "boards/{cafeCode}.json", DaumCafeBoards.class, cafeCode);
 	}
 
 	public DaumCafeArticles articles(String cafeCode, String boardId) {
 		requireAuthorization();
-		return daumRestApi.fetchObject("/cafe/v1/articles/{cafeCode}/{boardId}.json", DaumCafeArticles.class, cafeCode,
+		return daumRestApi.fetchObject(prefix + "articles/{cafeCode}/{boardId}.json", DaumCafeArticles.class, cafeCode,
 				cafeCode, boardId);
 	}
 
 	public DaumCafeRecentArticles recentArticles(String cafeCode) {
 		requireAuthorization();
-		return daumRestApi.fetchObject("/cafe/v1/recent_articles/{cafeCode}.json", DaumCafeRecentArticles.class,
+		return daumRestApi.fetchObject(prefix + "recent_articles/{cafeCode}.json", DaumCafeRecentArticles.class,
 				cafeCode);
 	}
 
 	public DaumCafeAlimis alimis() {
 		requireAuthorization();
-		return daumRestApi.fetchObject("/cafe/v1/alimis.json", DaumCafeAlimis.class);
+		return daumRestApi.fetchObject(prefix + "alimis.json", DaumCafeAlimis.class);
 	}
 
 	public DaumCafeArticle writeArticle(String cafeCode, String content, boolean hideyn) {
@@ -58,7 +59,7 @@ public class CafeTemplate extends AbstractDaumOperations implements CafeOperatio
 		String hide = hideyn ? "y" : "n";
 		parameters.set("hideyn", hide);
 		parameters.set("content", content);
-		return daumRestApi.post("/cafe/v1/write_article/{cafeCode}/_memo.json", parameters, DaumCafeArticle.class,
+		return daumRestApi.post(prefix + "write_article/{cafeCode}/_memo.json", parameters, DaumCafeArticle.class,
 				cafeCode);
 	}
 }

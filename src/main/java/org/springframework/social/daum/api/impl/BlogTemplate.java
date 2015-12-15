@@ -29,6 +29,7 @@ import org.springframework.web.client.RestTemplate;
  */
 public class BlogTemplate extends AbstractDaumOperations implements BlogOperations {
 
+	private String prefix = "/blog/v1/";
 	private final RestTemplate restTemplate;
 	private DaumRestApi daumRestApi;
 
@@ -47,7 +48,7 @@ public class BlogTemplate extends AbstractDaumOperations implements BlogOperatio
 		params.put("pageNo", pageNo);
 		params.put("result", result);
 		params.put("viewContent", viewContent);
-		String url = "/blog/v1/{blogName}/list.json?categoryId={categoryId}&pageNo={pageNo}&result={result}&viewContent={viewContent}";
+		String url = prefix + "{blogName}/list.json?categoryId={categoryId}&pageNo={pageNo}&result={result}&viewContent={viewContent}";
 		return daumRestApi.fetchObject(url, DaumBlogList.class, params);
 	}
 
@@ -69,21 +70,21 @@ public class BlogTemplate extends AbstractDaumOperations implements BlogOperatio
 	@Override
 	public DaumBlogCategories categories(String blogName) {
 		requireAuthorization();
-		String url = "/blog/v1/{blogName}/categories.json";
+		String url = prefix + "{blogName}/categories.json";
 		return daumRestApi.fetchObject(url, DaumBlogCategories.class, blogName);
 	}
 
 	@Override
 	public DaumBlogComments comments(String blogName, String postId) {
 		requireAuthorization();
-		String url = "/blog/v1/{blogName}/comments.json?postId={postId}";
+		String url = prefix + "{blogName}/comments.json?postId={postId}";
 		return daumRestApi.fetchObject(url, DaumBlogComments.class, blogName, postId);
 	}
 
 	@Override
 	public DaumBlogInfos info(String blogName) {
 		requireAuthorization();
-		String url = "/blog/v1/{blogName}/info.json";
+		String url = prefix + "{blogName}/info.json";
 		return daumRestApi.fetchObject(url, DaumBlogInfos.class, blogName);
 	}
 
@@ -96,7 +97,7 @@ public class BlogTemplate extends AbstractDaumOperations implements BlogOperatio
 		if (daumBlogWrite == null) {
 			throw new RequestPrarmetersException("is nonexistent parameter daumBlogWrite object");
 		}
-		String url = "/blog/v1/{blogName}/write.json";
+		String url = prefix + "{blogName}/write.json";
 		return daumRestApi.post(url, daumBlogWrite.toRequestParameters(), DaumBlogResponses.class, blogName);
 	}
 
@@ -109,14 +110,14 @@ public class BlogTemplate extends AbstractDaumOperations implements BlogOperatio
 		if (daumBlogModify == null) {
 			throw new RequestPrarmetersException("is nonexistent parameter daumBlogModify object");
 		}
-		String url = "/blog/v1/{blogName}/modify.json";
+		String url = prefix + "{blogName}/modify.json";
 		return daumRestApi.post(url, daumBlogModify.toRequestParameters(), DaumBlogResponses.class, blogName);
 	}
 
 	@Override
 	public DaumBlogReads read(String blogName, String postId) {
 		requireAuthorization();
-		String url = "/blog/v1/{blogName}/read.json?postId={postId}";
+		String url = prefix + "{blogName}/read.json?postId={postId}";
 		return daumRestApi.fetchObject(url, DaumBlogReads.class, blogName, postId);
 	}
 
@@ -129,13 +130,13 @@ public class BlogTemplate extends AbstractDaumOperations implements BlogOperatio
 		if (daumBlogCommentWrite == null) {
 			throw new RequestPrarmetersException("is nonexistent parameter daumBlogCommentWrite object");
 		}
-		String url = "/blog/v1/{blogName}/comment/write.json";
+		String url = prefix + "{blogName}/comment/write.json";
 		return daumRestApi.post(url, daumBlogCommentWrite.toRequestParameters(), DaumBlogResponses.class, blogName);
 	}
 
 	@Override
 	public DaumBlogActivities activities(String blogName) {
-		String url = "/blog/v1/{blogName}/activities.json";
+		String url = prefix + "{blogName}/activities.json";
 		return daumRestApi.fetchObject(url, DaumBlogActivities.class, blogName);
 	}
 
@@ -143,7 +144,7 @@ public class BlogTemplate extends AbstractDaumOperations implements BlogOperatio
 	public DaumBlogResponses upload(String blogName, String file) {
 		MultiValueMap<String, Object> map = new LinkedMultiValueMap<String, Object>();
 		map.add("file", new FileSystemResource(file));
-		String url = "/blog/v1/{blogName}/upload-file.json";
+		String url = prefix + "{blogName}/upload-file.json";
 		HttpHeaders imageHeaders = new HttpHeaders();
 		imageHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
 		HttpEntity<MultiValueMap<String, Object>> imageEntity = new HttpEntity<MultiValueMap<String, Object>>(map,

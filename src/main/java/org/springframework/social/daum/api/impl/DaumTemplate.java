@@ -25,17 +25,13 @@ public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 	private BlogOperations blogOperations;
 	private SearchOperations searchOperations;
 
-	private SearchRestTemplate searchRestTemplate;
+	private ApiRestTemplate apiRestTemplate;
 
 	private String apiKey;
 
 	public DaumTemplate() {
 		initialize();
 	}
-
-	// public DaumTemplate(String accessToken) {
-	// super(accessToken);
-	// }
 
 	public DaumTemplate(String apiKey) {
 		this.apiKey = apiKey;
@@ -68,25 +64,30 @@ public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 
 	private void initialize() {
 		super.setRequestFactory(ClientHttpRequestFactorySelector.bufferRequests(getRestTemplate().getRequestFactory()));
-		searchRestTemplate = createRestTemplate(DaumTokenStrategy.API_KEY);
+		apiRestTemplate = createRestTemplate(DaumTokenStrategy.API_KEY);
 		initSubApis();
 	}
 
-	private SearchRestTemplate createRestTemplate(DaumTokenStrategy daumTokenStrategy) {
-		SearchRestTemplate client;
-		List<HttpMessageConverter<?>> messageConverters = getMessageConverters();
-		try {
-			client = new SearchRestTemplate(messageConverters);
-		} catch (NoSuchMethodError e) {
-			client = new SearchRestTemplate();
-			client.setMessageConverters(messageConverters);
-		}
+	private ApiRestTemplate createRestTemplate(DaumTokenStrategy daumTokenStrategy) {
+		ApiRestTemplate client = newInstanceRest();
 		client.setRequestFactory(ClientHttpRequestFactorySelector.getRequestFactory());
 		ClientHttpRequestInterceptor interceptor = daumTokenStrategy.interceptor(apiKey);
 		List<ClientHttpRequestInterceptor> interceptors = new LinkedList<ClientHttpRequestInterceptor>();
 		interceptors.add(interceptor);
 		client.setInterceptors(interceptors);
 		return client;
+	}
+
+	private ApiRestTemplate newInstanceRest() {
+		ApiRestTemplate apiRestTemplate = null;
+		List<HttpMessageConverter<?>> messageConverters = getMessageConverters();
+		try {
+			apiRestTemplate = new ApiRestTemplate(messageConverters);
+		} catch (NoSuchMethodError e) {
+			apiRestTemplate = new ApiRestTemplate();
+			apiRestTemplate.setMessageConverters(messageConverters);
+		}
+		return apiRestTemplate;
 	}
 
 	public String getBaseGraphApiUrl() {
@@ -97,7 +98,7 @@ public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 		userOperation = new UserTemplate(this, getRestTemplate(), isAuthorized());
 		cafeOperation = new CafeTemplate(this, getRestTemplate(), isAuthorized());
 		blogOperations = new BlogTemplate(this, getRestTemplate(), isAuthorized());
-		searchOperations = new SearchTemplate(this, searchRestTemplate);
+		searchOperations = new SearchTemplate(this, apiRestTemplate);
 	}
 
 	@Override

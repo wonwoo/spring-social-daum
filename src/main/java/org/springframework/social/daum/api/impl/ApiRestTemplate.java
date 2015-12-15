@@ -11,17 +11,17 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.social.daum.api.DaumSearchRequest;
 import org.springframework.web.client.RestTemplate;
 
-public class SearchRestTemplate extends RestTemplate {
+public class ApiRestTemplate extends RestTemplate {
 
-	public SearchRestTemplate() {
+	public ApiRestTemplate() {
 		super();
 	}
 
-	public SearchRestTemplate(ClientHttpRequestFactory requestFactory) {
+	public ApiRestTemplate(ClientHttpRequestFactory requestFactory) {
 		super(requestFactory);
 	}
 
-	public SearchRestTemplate(List<HttpMessageConverter<?>> messageConverters) {
+	public ApiRestTemplate(List<HttpMessageConverter<?>> messageConverters) {
 		super(messageConverters);
 	}
 
@@ -31,5 +31,4 @@ public class SearchRestTemplate extends RestTemplate {
 		ResponseEntity<T> responseEntity = exchange(uri, HttpMethod.GET, null, responseType);
 		return responseEntity;
 	}
-
 }
