@@ -4,8 +4,11 @@ import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.social.daum.api.BlogOperations;
 import org.springframework.social.daum.api.CafeOperations;
+import org.springframework.social.daum.api.CalendarOperations;
+import org.springframework.social.daum.api.ContentsOperations;
 import org.springframework.social.daum.api.Daum;
 import org.springframework.social.daum.api.SearchOperations;
+import org.springframework.social.daum.api.ShopingOperations;
 import org.springframework.social.daum.api.UserOperations;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
 import org.springframework.social.support.ClientHttpRequestFactorySelector;
@@ -24,6 +27,9 @@ public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 	private CafeOperations cafeOperation;
 	private BlogOperations blogOperations;
 	private SearchOperations searchOperations;
+	private CalendarOperations calendarOperations;
+	private ContentsOperations contentsOperations;
+	private ShopingOperations shopingOperations;
 
 	private ApiRestTemplate apiRestTemplate;
 
@@ -44,22 +50,39 @@ public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 		initialize();
 	}
 
+	@Override
 	public UserOperations userOperation() {
-		return userOperation;
+		return this.userOperation;
 	}
 
+	@Override
 	public CafeOperations cafeOperation() {
-		return cafeOperation;
+		return this.cafeOperation;
 	}
 
 	@Override
 	public BlogOperations blogOperations() {
-		return blogOperations;
+		return this.blogOperations;
 	}
 
 	@Override
 	public SearchOperations searchOperations() {
-		return searchOperations;
+		return this.searchOperations;
+	}
+
+	@Override
+	public CalendarOperations calendarOperations() {
+		return this.calendarOperations;
+	}
+
+	@Override
+	public ContentsOperations contentsOperations() {
+		return this.contentsOperations;
+	}
+
+	@Override
+	public ShopingOperations shopingOperations() {
+		return this.shopingOperations;
 	}
 
 	private void initialize() {
@@ -98,7 +121,11 @@ public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 		userOperation = new UserTemplate(this, getRestTemplate(), isAuthorized());
 		cafeOperation = new CafeTemplate(this, getRestTemplate(), isAuthorized());
 		blogOperations = new BlogTemplate(this, getRestTemplate(), isAuthorized());
+		calendarOperations = new CalendarTemplate(this, getRestTemplate(), isAuthorized());
 		searchOperations = new SearchTemplate(this, apiRestTemplate);
+		contentsOperations = new ContentsTemplate(this, apiRestTemplate);
+		shopingOperations = new ShopingTemplate(this, apiRestTemplate);
+
 	}
 
 	@Override
@@ -130,5 +157,4 @@ public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 	public <T> T post(String url, Object request, Class<T> type) {
 		return getRestTemplate().postForObject(getBaseGraphApiUrl() + url, request, type);
 	}
-
 }

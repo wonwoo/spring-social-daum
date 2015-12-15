@@ -7,7 +7,7 @@ public abstract class AbstractApiRestTemplate {
 	public String getUrl() {
 		StringBuilder builder = new StringBuilder();
 		setUrl(builder);
-		return uri + builder.toString();
+		return uri + "/" + builder.toString();
 	}
 
 	abstract public void setUrl(StringBuilder builder);

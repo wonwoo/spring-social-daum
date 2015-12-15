@@ -22,7 +22,7 @@ public class SearchTemplate extends AbstractApiRestTemplate implements SearchOpe
 
 	@Override
 	public void setUrl(StringBuilder builder) {
-		builder.append("search/");
+		builder.append("search");
 	}
 
 	public SearchTemplate(DaumRestApi daumRestApi, ApiRestTemplate apiRestTemplate) {

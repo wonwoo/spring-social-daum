@@ -89,9 +89,11 @@ public class BlogTest extends DaumTest {
 		DaumBlogActivities daumBlogActivities = daum.blogOperations().activities("leeww1020");
 		System.out.println(daumBlogActivities);
 	}
+
 	@Test
 	public void upload() {
-		DaumBlogResponses daumBlogResponses = daum.blogOperations().upload("leeww1020", "C:\\Users\\Public\\Pictures\\Sample Pictures\\db225928-a4c5-462b-87aa-97a798257419.png");
+		DaumBlogResponses daumBlogResponses = daum.blogOperations().upload("leeww1020",
+				"C:\\Users\\Public\\Pictures\\Sample Pictures\\db225928-a4c5-462b-87aa-97a798257419.png");
 		System.out.println(daumBlogResponses);
 	}
 

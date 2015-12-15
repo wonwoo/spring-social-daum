@@ -9,14 +9,6 @@ public class UserTemplate extends AbstractDaumOperations implements UserOperatio
 
 	private RestTemplate restTemplate;
 	private String prefix = "/user/v1/";
-
-	// public UserTemplate(RestTemplate restTemplate, RestTemplate
-	// adminRestTemplate, boolean isAuthorized) {
-	// super(isAuthorized);
-	// this.restTemplate = restTemplate;
-	// this.adminRestTemplate = adminRestTemplate;
-	// }
-
 	DaumRestApi daumRestApi;
 
 	public UserTemplate(DaumRestApi daumRestApi, RestTemplate restTemplate, boolean authorized) {
