@@ -25,7 +25,7 @@ public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 	private BlogOperations blogOperations;
 	private SearchOperations searchOperations;
 
-	private RestTemplate restTemplateApi;
+	private SearchRestTemplate searchRestTemplate;
 
 	private String apiKey;
 
@@ -68,17 +68,17 @@ public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 
 	private void initialize() {
 		super.setRequestFactory(ClientHttpRequestFactorySelector.bufferRequests(getRestTemplate().getRequestFactory()));
-		restTemplateApi = createRestTemplate(DaumTokenStrategy.API_KEY);
+		searchRestTemplate = createRestTemplate(DaumTokenStrategy.API_KEY);
 		initSubApis();
 	}
 
-	private RestTemplate createRestTemplate(DaumTokenStrategy daumTokenStrategy) {
-		RestTemplate client;
+	private SearchRestTemplate createRestTemplate(DaumTokenStrategy daumTokenStrategy) {
+		SearchRestTemplate client;
 		List<HttpMessageConverter<?>> messageConverters = getMessageConverters();
 		try {
-			client = new RestTemplate(messageConverters);
+			client = new SearchRestTemplate(messageConverters);
 		} catch (NoSuchMethodError e) {
-			client = new RestTemplate();
+			client = new SearchRestTemplate();
 			client.setMessageConverters(messageConverters);
 		}
 		client.setRequestFactory(ClientHttpRequestFactorySelector.getRequestFactory());
@@ -97,7 +97,7 @@ public class DaumTemplate extends AbstractOAuth2ApiBinding implements Daum {
 		userOperation = new UserTemplate(this, getRestTemplate(), isAuthorized());
 		cafeOperation = new CafeTemplate(this, getRestTemplate(), isAuthorized());
 		blogOperations = new BlogTemplate(this, getRestTemplate(), isAuthorized());
-		searchOperations = new SearchTemplate(this, restTemplateApi);
+		searchOperations = new SearchTemplate(this, searchRestTemplate);
 	}
 
 	@Override

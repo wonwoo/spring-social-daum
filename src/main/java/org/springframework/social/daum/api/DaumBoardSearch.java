@@ -38,4 +38,25 @@ public class DaumBoardSearch {
 		return comment;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("DaumBoardSearch [pubDate=");
+		builder.append(pubDate);
+		builder.append(", author=");
+		builder.append(author);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", description=");
+		builder.append(description);
+		builder.append(", link=");
+		builder.append(link);
+		builder.append(", keyword=");
+		builder.append(keyword);
+		builder.append(", comment=");
+		builder.append(comment);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }
